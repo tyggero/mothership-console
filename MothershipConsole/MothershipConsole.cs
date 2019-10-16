@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MothershipConsole.Apps;
 
 namespace MothershipConsole
 {
@@ -12,9 +13,14 @@ namespace MothershipConsole
         {
             Console.WriteLine("Loading main Mothership terminal...");
 
-            Console.WriteLine("press any key");
-            Console.ReadKey(true);
-            
+            while (true) {
+                Console.WriteLine("press any key to run Testing app");
+                Console.ReadKey(true);
+                Console.WriteLine();
+                var testing = new Testing();
+                testing.Run();
+                Console.WriteLine();
+            }
         }
     }
 }
