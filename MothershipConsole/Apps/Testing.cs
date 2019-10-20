@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MothershipConsole.Apps
 {
+    [App("test_app")]
     class Testing : App
     {
         protected override string ReadPrefix
