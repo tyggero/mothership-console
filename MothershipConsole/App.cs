@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using Console = Colorful.Console;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,8 +16,8 @@ namespace MothershipConsole
         //properties and methods to override
         protected virtual void WriteAppTitle(){ Console.WriteLine("(Insert App Title)"); }
         protected virtual string ReadPrefix {get { return "[UnknownApp]->"; }}
-        protected virtual ConsoleColor BackGroundColor {get { return ConsoleColor.Black; }}
-        protected virtual ConsoleColor TextColor{get { return ConsoleColor.White; }}
+        protected virtual Color BackGroundColor {get { return Color.Black; }}
+        protected virtual Color TextColor{get { return Color.White; }}
 
         //public method called from outside
         public virtual bool Run()

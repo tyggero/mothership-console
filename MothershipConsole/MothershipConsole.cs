@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using Console = Colorful.Console;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -185,9 +187,9 @@ namespace MothershipConsole
 
         static void ResetScreen()
         {
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = Color.Black;
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = Color.White;
         }
 
         static IEnumerable<Command> GetCommands()
