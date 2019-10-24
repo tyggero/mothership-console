@@ -9,19 +9,19 @@ namespace MothershipConsole.Apps
     [App("test_app")]
     class TestingApp : App
     {
-        protected override string ReadPrefix
-        {
-            get { return "[Testing]->"; }
-        }
+        protected override void WriteAppTitle() { Console.WriteLine("Welcome to the Testing App!"); }
+        protected override string ReadPrefix { get { return "[TestingApp]->"; } }
+        protected override ConsoleColor BackGroundColor { get { return ConsoleColor.DarkMagenta; } }
+        protected override ConsoleColor TextColor { get { return ConsoleColor.White; } }
 
-        public override bool Run()
+        protected override void DoWhatYouGottaDo()
         {
             var key = ReadKey();
             if(key.Key == ConsoleKey.Escape)
             {
-                return false;
+                CrashApp();
             }
-            return true;
+            CloseApp();
         }
     }
 }

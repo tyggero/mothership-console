@@ -79,10 +79,10 @@ namespace MothershipConsole
             //show loading
             var percent = 0;
             Random random = new Random();
-            int loadRate = random.Next(0, 50);
+            int loadRate = random.Next(1, 50);
             while (percent < 100)
             {
-                percent += random.Next(0, loadRate);
+                percent += random.Next(1, loadRate);
                 percent = Math.Min(percent, 100);
                 Console.Write("\rLaunching app " + listApp.Name + "... " + percent + " %");
                 System.Threading.Thread.Sleep(200);
@@ -91,6 +91,8 @@ namespace MothershipConsole
 
             //run the app
             var WasAlright = app.Run();
+
+            System.Threading.Thread.Sleep(1000);
 
             ResetScreen();
 
@@ -102,6 +104,8 @@ namespace MothershipConsole
             {
                 Console.WriteLine("There was an error in the '" + listApp.Name + "' app");
             }
+
+            System.Threading.Thread.Sleep(1000);
 
             return true;
         }
