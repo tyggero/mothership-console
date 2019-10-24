@@ -90,7 +90,11 @@ namespace MothershipConsole
             Console.WriteLine();
 
             //run the app
-            if (app.Run())
+            var WasAlright = app.Run();
+
+            ResetScreen();
+
+            if (WasAlright)
             {
                 Console.WriteLine("App '" + listApp.Name + "' was closed");
             }
@@ -106,7 +110,7 @@ namespace MothershipConsole
         [CommandHelp("Clears the screen")]
         public static bool ClearCommand(string arg = "")
         {
-            Console.Clear();
+            ResetScreen();
 
             return true;
         }
@@ -173,6 +177,13 @@ namespace MothershipConsole
                     yield return listApp;
                 }
             }
+        }
+
+        static void ResetScreen()
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         static IEnumerable<Command> GetCommands()

@@ -45,10 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="CommandHelpAttribute.cs" />
-    <Compile Include="CommandAttribute.cs" />
-    <Compile Include="AppAttribute.cs" />
-    <Compile Include="Apps\Testing.cs" />
+    <Compile Include="Attributes\CommandHelpAttribute.cs" />
+    <Compile Include="Attributes\CommandAttribute.cs" />
+    <Compile Include="Attributes\AppAttribute.cs" />
+    <Compile Include="Apps\TestingApp.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="ListApp.cs" />
     <Compile Include="MothershipConsole.cs" />

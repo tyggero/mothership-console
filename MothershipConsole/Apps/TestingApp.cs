@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MothershipConsole.Apps
 {
     [App("test_app")]
-    class Testing : App
+    class TestingApp : App
     {
         protected override string ReadPrefix
         {
