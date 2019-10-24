@@ -102,11 +102,11 @@ namespace MothershipConsole
             return true;
         }
 
-        [Command("test")]
-        [CommandHelp("Yells and does nothing")]
-        public static bool TestCommand(string arg = "")
+        [Command("clear")]
+        [CommandHelp("Clears the screen")]
+        public static bool ClearCommand(string arg = "")
         {
-            Console.WriteLine("I am soooooooooo testy!");
+            Console.Clear();
 
             return true;
         }
