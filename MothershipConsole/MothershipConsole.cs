@@ -63,6 +63,45 @@ namespace MothershipConsole
             return true;
         }
 
+        [Command("run")]
+        [CommandHelp("Run a specified app i.e. 'run AppName'")]
+        public static bool RunCommand(string arg = "")
+        {
+            //get the app
+            ListApp listApp = Apps.Where(a => a.Name == arg).FirstOrDefault();
+            if (listApp == null)
+            {
+                Console.WriteLine("App '" + arg + "' was not found");
+                return false;
+            }
+            App app = (App)Activator.CreateInstance(listApp.Class);
+
+            //show loading
+            var percent = 0;
+            Random random = new Random();
+            int loadRate = random.Next(0, 50);
+            while (percent < 100)
+            {
+                percent += random.Next(0, loadRate);
+                percent = Math.Min(percent, 100);
+                Console.Write("\rLaunching app " + listApp.Name + "... " + percent + " %");
+                System.Threading.Thread.Sleep(200);
+            }
+            Console.WriteLine();
+
+            //run the app
+            if (app.Run())
+            {
+                Console.WriteLine("App '" + listApp.Name + "' was closed");
+            }
+            else
+            {
+                Console.WriteLine("There was an error in the '" + listApp.Name + "' app");
+            }
+
+            return true;
+        }
+
         [Command("test")]
         [CommandHelp("Yells and does nothing")]
         public static bool TestCommand(string arg = "")

@@ -16,7 +16,11 @@ namespace MothershipConsole.Apps
 
         public override bool Run()
         {
-            ReadKey();
+            var key = ReadKey();
+            if(key.Key == ConsoleKey.Escape)
+            {
+                return false;
+            }
             return true;
         }
     }
