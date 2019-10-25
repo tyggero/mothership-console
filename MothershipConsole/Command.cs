@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MothershipConsole
 {
-    class Command
+    public class Command
     {
         public string Name { get; set; }
         public string Help { get; set; }
         public MethodInfo Method { get; set; }
-}
+    }
 }

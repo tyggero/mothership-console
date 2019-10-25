@@ -13,29 +13,22 @@ namespace MothershipConsole
     class MothershipConsole
     {
         private static IEnumerable<ListApp> Apps;
-        private static IEnumerable<Command> Commands;
+        private static CommandParser Parser;
         
-
-
         static void Main(string[] args)
         {
             Console.WriteLine("Loading main Mothership terminal...");
             Console.WriteLine("...");
-
-            //JUST TESTING
-            var testApp = new ListApp() { Name = "TestClass" };
-            SaveManager.SaveAsJson<ListApp>(testApp, "testApp.json");
-            var loadedApp = SaveManager.LoadFromJson<ListApp>("testApp1212.json");
-
+            
             // get apps
             Apps = GetImplementedApps();
 
             //get commands
-            Commands = GetCommands();
+            Parser = new CommandParser(typeof(MothershipConsole));
 
             //infinite command loop
             while (true) {
-                HandleCommand();
+                Parser.HandleCommand("$-Network/Ship/OS> ");
             }
         }
 
@@ -51,7 +44,7 @@ namespace MothershipConsole
         public static bool HelpCommand(string arg = "")
         {
             Console.WriteLine("Available Commands:");
-            foreach (var command in Commands)
+            foreach (var command in Parser.Commands)
             {
                 Console.WriteLine(" - '" + command.Name + "' (" + command.Help + ")");
             }
@@ -139,40 +132,6 @@ namespace MothershipConsole
         #region Other Methods
         // OTHER METHODS
 
-        static bool HandleCommand()
-        {
-            Console.WriteLine();
-            Console.Write("$-Network/Ship/OS> ");
-
-            string input = Console.ReadLine();
-
-            string[] words = input.Split(new string[] { " " }, 2, StringSplitOptions.None);
-            string inputCommand = words[0];
-            string inputArgs = words.Length > 1 ? words[1] : null;
-
-            Command command = Commands.Where(c => c.Name == inputCommand).FirstOrDefault();
-
-            if (command == null)
-            {
-                Console.WriteLine("Command '" + inputCommand + "' not found");
-                Console.WriteLine("Use 'help' for available commands");
-
-                return false;
-            }
-
-            if (command.Method.GetParameters().FirstOrDefault()?.ParameterType == typeof(string))
-            {
-                command.Method.Invoke(null, new object[] { inputArgs });
-            }
-            else
-            {
-                command.Method.Invoke(null, new object[] { } );
-            }
-
-            return true;
-        }
-
-
         static IEnumerable<ListApp> GetImplementedApps()
         {
             Assembly assembly = Assembly.GetAssembly(typeof(MothershipConsole));
@@ -195,26 +154,6 @@ namespace MothershipConsole
             Console.BackgroundColor = Color.Black;
             Console.Clear();
             Console.ForegroundColor = Color.White;
-        }
-
-        static IEnumerable<Command> GetCommands()
-        {
-            Assembly assembly = Assembly.GetAssembly(typeof(MothershipConsole));
-
-            var commands = typeof(MothershipConsole).GetMethods()
-                      .Where(m => m.GetCustomAttributes(typeof(CommandAttribute), false).Length > 0)
-                      .Select(m => new Command()
-                      {
-                          Name = ((CommandAttribute)(m.GetCustomAttributes(typeof(CommandAttribute), true).First())).Name
-                                                  ,
-                          Help = ((CommandHelpAttribute)(m.GetCustomAttributes(typeof(CommandHelpAttribute), true).First())).Help
-                                                  ,
-                          Method = m
-                      })
-                      .ToList()
-                      ;
-
-            return commands;
         }
 
         #endregion

@@ -61,6 +61,7 @@
     <Compile Include="Attributes\AppAttribute.cs" />
     <Compile Include="Apps\TestingApp.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="CommandParser.cs" />
     <Compile Include="ListApp.cs" />
     <Compile Include="MothershipConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
