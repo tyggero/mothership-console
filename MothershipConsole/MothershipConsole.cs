@@ -22,6 +22,11 @@ namespace MothershipConsole
             Console.WriteLine("Loading main Mothership terminal...");
             Console.WriteLine("...");
 
+            //JUST TESTING
+            var testApp = new ListApp() { Name = "TestClass" };
+            SaveManager.SaveAsJson<ListApp>(testApp, "testApp.json");
+            var loadedApp = SaveManager.LoadFromJson<ListApp>("testApp1212.json");
+
             // get apps
             Apps = GetImplementedApps();
 
