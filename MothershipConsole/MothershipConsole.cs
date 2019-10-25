@@ -17,6 +17,7 @@ namespace MothershipConsole
         
         static void Main(string[] args)
         {
+            //write some lines
             Console.WriteLine("Loading main Mothership terminal...");
             Console.WriteLine("...");
             
