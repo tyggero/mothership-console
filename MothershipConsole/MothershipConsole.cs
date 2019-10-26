@@ -22,6 +22,27 @@ namespace MothershipConsole
             Console.WriteLine("Loading main Mothership terminal...");
             Console.WriteLine("...");
 
+            
+            
+            while (true)
+            {
+                Console.WriteLine();
+                Console.Write("Insert your ship's connection key: ");
+                if (Console.ReadLine().ToLower() == "heslo".ToLower())
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Could not connect to this connection key");
+                    Console.WriteLine("The key should have 10 letters or numbers");
+                }
+            }
+
+            Console.WriteLine("Connecting to ship ZEVL...");
+            System.Threading.Thread.Sleep(3000);
+            Console.WriteLine("Succesfully connected to space ship ZEVL!");
+
             //TEST
             var storeApps = Repository.StoreApps;
             var newApp = new StoreApp() { Name = "New App", Description = "I am very New", State = StoreApp.InstallState.NotInstalled };

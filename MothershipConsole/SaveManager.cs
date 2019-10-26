@@ -25,6 +25,7 @@ namespace MothershipConsole
         {
             try
             {
+                System.IO.Directory.CreateDirectory(folderPath);
                 var serialized = System.IO.File.ReadAllText(folderPath + @"\" + fileName);
 
                 T dataObject = JsonConvert.DeserializeObject<T>(serialized);

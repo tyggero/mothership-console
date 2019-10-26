@@ -33,5 +33,55 @@ namespace MothershipConsole
                 }
             }
         }
+
+        public static List<CrewMember> ExpectedCrewMembers
+        {
+            get
+            {
+                var fromFile = SaveManager.LoadFromJson<List<CrewMember>>("ExpectedCrewMembers.json");
+                if (fromFile != null)
+                {
+                    return fromFile;
+                }
+                else
+                {
+                    var created = new List<CrewMember>();
+                    return created;
+                }
+            }
+
+            set
+            {
+                if (value != null)
+                {
+                    SaveManager.SaveAsJson<List<CrewMember>>(value, "ExpectedCrewMembers.json");
+                }
+            }
+        }
+
+        public static List<CrewMember> CrewMembers
+        {
+            get
+            {
+                var fromFile = SaveManager.LoadFromJson<List<CrewMember>>("CrewMembers.json");
+                if (fromFile != null)
+                {
+                    return fromFile;
+                }
+                else
+                {
+                    var created = new List<CrewMember>();
+                    return created;
+                }
+            }
+
+            set
+            {
+                if (value != null)
+                {
+                    SaveManager.SaveAsJson<List<CrewMember>>(value, "CrewMembers.json");
+                }
+            }
+        }
     }
 }
