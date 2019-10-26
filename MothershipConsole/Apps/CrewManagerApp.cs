@@ -114,7 +114,7 @@ namespace MothershipConsole.Apps
         }
 
         [Command("pridej_clena")]
-        [CommandHelp("Vypíše registrované členy posádky")]
+        [CommandHelp("Přidá nového člena posádky")]
         public bool PridejClenaCommand(string arg = "")
         {
             CrewMember newMember = new CrewMember();

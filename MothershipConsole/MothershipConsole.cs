@@ -135,29 +135,7 @@ namespace MothershipConsole
         [CommandHelp("Unlocks all door")]
         public static bool UnlockCommand(string arg = "")
         {
-            //Lockdown
-            var expected = Repository.ExpectedCrewMembers;
-            var members = Repository.CrewMembers;
-
-            var missing = 0;
-            foreach (var exp in expected)
-            {
-                if (members.Where(e => e.Name == exp.Name
-                                     && e.Surname == exp.Surname
-                                     && e.Team == exp.Team).Count() == 0)
-                {
-                    missing++;
-                }
-            }
-
-            if (missing > 0)
-            {
-                Console.WriteLine(missing + " unexpected humans found on the ship. All door locked for safety.");
-            }
-            else
-            {
-                Console.WriteLine("Unlocking all door!!");
-            }
+            Console.WriteLine("Unlocking all door!!");
             return true;
         }
 
