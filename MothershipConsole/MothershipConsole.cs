@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using MothershipConsole.Apps;
+using MothershipConsole.Model;
 
 namespace MothershipConsole
 {
@@ -19,6 +20,13 @@ namespace MothershipConsole
         {
             Console.WriteLine("Loading main Mothership terminal...");
             Console.WriteLine("...");
+
+            //TEST
+            var storeApps = Repository.StoreApps;
+            var newApp = new StoreApp() { Name = "New App", Description = "I am very New", State = StoreApp.InstallState.NotInstalled };
+            storeApps.Add(newApp);
+            Repository.StoreApps = storeApps;
+            //END TEST
             
             // get apps
             Apps = GetImplementedApps();

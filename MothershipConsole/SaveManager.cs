@@ -35,8 +35,6 @@ namespace MothershipConsole
             {
                 return default(T);
             }
-
-            
         }
     }
 }
