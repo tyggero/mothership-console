@@ -11,10 +11,12 @@ namespace MothershipConsole
     {
         public IEnumerable<Command> Commands;
         public readonly Type CommandsClass;
+        public object Object;
 
-        public CommandParser(Type commandsClass)
+        public CommandParser(Type commandsClass, object obj = null)
         {
             CommandsClass = commandsClass;
+            Object = obj;
 
             //find commands in the specified Class
             LoadCommands();
@@ -44,11 +46,11 @@ namespace MothershipConsole
 
             if (command.Method.GetParameters().FirstOrDefault()?.ParameterType == typeof(string))
             {
-                command.Method.Invoke(null, new object[] { inputArgs });
+                command.Method.Invoke(Object, new object[] { inputArgs });
             }
             else
             {
-                command.Method.Invoke(null, new object[] { });
+                command.Method.Invoke(Object, new object[] { });
             }
 
             return true;

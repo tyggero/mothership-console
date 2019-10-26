@@ -10,21 +10,23 @@ using System.Threading.Tasks;
 
 namespace MothershipConsole.Apps
 {
-    //[App("test_app")]
-    class TestingApp : App
+    [App("App_Store")]
+    class AppStoreApp : App
     {
         protected override void WriteAppTitle() 
         {
             // choose font on http://www.figlet.org/examples.html
-            var font = FiggleFonts.Epic ;
-            Console.WriteLine(font.Render("Testing App"));
+            var font = FiggleFonts.Banner ;
+            Console.WriteLine(font.Render("App Store"));
         }
-        protected override string ReadPrefix { get { return "[TestingApp]->"; } }
-        protected override Color BackGroundColor { get { return Color.DarkMagenta; } }
-        protected override Color TextColor { get { return Color.White; } }
+        protected override string ReadPrefix { get { return "[App_Store]->"; } }
+        protected override Color BackGroundColor { get { return Color.Bisque; } }
+        protected override Color TextColor { get { return Color.Black; } }
 
         protected override void DoWhatYouGottaDo()
         {
+            Console.WriteLine("App Store se právě aktualizuje. Může to trvat i několik hodin. Zkuste to prosím později.");
+            Console.WriteLine("Stiskněte kteroukoliv klávesu...");
             var key = ReadKey();
             if(key.Key == ConsoleKey.Escape)
             {

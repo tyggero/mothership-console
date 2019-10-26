@@ -21,35 +21,17 @@ namespace MothershipConsole
             //write some lines
             Console.WriteLine("Loading main Mothership terminal...");
             Console.WriteLine("...");
-
-            
-            
-            while (true)
-            {
-                Console.WriteLine();
-                Console.Write("Insert your ship's connection key: ");
-                if (Console.ReadLine().ToLower() == "heslo".ToLower())
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Could not connect to this connection key");
-                    Console.WriteLine("The key should have 10 letters or numbers");
-                }
-            }
-
+#if !DEBUG
+            System.Threading.Thread.Sleep(500);
+            Console.WriteLine("Insert your ship's connection key: ");
+            System.Threading.Thread.Sleep(1000);
+            Console.WriteLine("Automatically using the last connection key '4,kamzik,muka,7,24,nekricime,asie,mlada boleslav,7,svojsik'");
+            System.Threading.Thread.Sleep(1000);
             Console.WriteLine("Connecting to ship ZEVL...");
             System.Threading.Thread.Sleep(3000);
             Console.WriteLine("Succesfully connected to space ship ZEVL!");
+#endif
 
-            //TEST
-            var storeApps = Repository.StoreApps;
-            var newApp = new StoreApp() { Name = "New App", Description = "I am very New", State = StoreApp.InstallState.NotInstalled };
-            storeApps.Add(newApp);
-            Repository.StoreApps = storeApps;
-            //END TEST
-            
             // get apps
             Apps = GetImplementedApps();
 
@@ -66,7 +48,7 @@ namespace MothershipConsole
 
 
 
-        #region Commands
+#region Commands
         // COMMAND DEFINITIONS
 
         [Command("help")]
@@ -149,7 +131,37 @@ namespace MothershipConsole
             return true;
         }
 
-        #endregion
+        [Command("unlock_doors")]
+        [CommandHelp("Unlocks all door")]
+        public static bool UnlockCommand(string arg = "")
+        {
+            //Lockdown
+            var expected = Repository.ExpectedCrewMembers;
+            var members = Repository.CrewMembers;
+
+            var missing = 0;
+            foreach (var exp in expected)
+            {
+                if (members.Where(e => e.Name == exp.Name
+                                     && e.Surname == exp.Surname
+                                     && e.Team == exp.Team).Count() == 0)
+                {
+                    missing++;
+                }
+            }
+
+            if (missing > 0)
+            {
+                Console.WriteLine(missing + " unexpected humans found on the ship. All door locked for safety.");
+            }
+            else
+            {
+                Console.WriteLine("Unlocking all door!!");
+            }
+            return true;
+        }
+
+#endregion
 
 
 
@@ -159,7 +171,7 @@ namespace MothershipConsole
 
 
 
-        #region Other Methods
+#region Other Methods
         // OTHER METHODS
 
         static IEnumerable<ListApp> GetImplementedApps()
@@ -186,6 +198,6 @@ namespace MothershipConsole
             Console.ForegroundColor = Color.White;
         }
 
-        #endregion
+#endregion
     }
 }
