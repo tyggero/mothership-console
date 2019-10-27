@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MothershipConsole
+namespace MothershipConsole.Model
 {
-    public class ListApp
+    public class Experience
     {
-        public string Name { get; set; }
-        public Type Class { get; set; }
+        public string Name;
+        public string KeyToUnlock;
     }
 }

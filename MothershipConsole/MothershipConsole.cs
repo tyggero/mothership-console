@@ -13,7 +13,7 @@ namespace MothershipConsole
 {
     class MothershipConsole
     {
-        private static IEnumerable<ListApp> Apps;
+        private static List<ListApp> InstalledApps;
         private static CommandParser Parser;
         
         static void Main(string[] args)
@@ -33,13 +33,16 @@ namespace MothershipConsole
 #endif
 
             // get apps
-            Apps = GetImplementedApps();
+            InstalledApps = Repository.InstalledApps;
 
             //get commands
             Parser = new CommandParser(typeof(MothershipConsole));
 
             //infinite command loop
             while (true) {
+                // get apps
+                InstalledApps = Repository.InstalledApps;
+
                 Parser.HandleCommand("$-Network/Ship/OS> ");
             }
         }
@@ -68,7 +71,7 @@ namespace MothershipConsole
         public static bool AppCommand(string arg = "")
         {
             Console.WriteLine("Available Apps:");
-            foreach (var app in Apps)
+            foreach (var app in InstalledApps)
             {
                 Console.WriteLine(" - " + app.Name);
             }
@@ -80,7 +83,7 @@ namespace MothershipConsole
         public static bool RunCommand(string arg = "")
         {
             //get the app
-            ListApp listApp = Apps.Where(a => a.Name == arg).FirstOrDefault();
+            ListApp listApp = InstalledApps.Where(a => a.Name == arg).FirstOrDefault();
             if (listApp == null)
             {
                 Console.WriteLine("App '" + arg + "' was not found");
@@ -152,23 +155,7 @@ namespace MothershipConsole
 #region Other Methods
         // OTHER METHODS
 
-        static IEnumerable<ListApp> GetImplementedApps()
-        {
-            Assembly assembly = Assembly.GetAssembly(typeof(MothershipConsole));
-
-            foreach (Type type in assembly.GetTypes())
-            {
-                if (type.GetCustomAttributes(typeof(AppAttribute), true).Length > 0)
-                {
-                    var listApp = new ListApp();
-                    listApp.Class = type;
-                    listApp.Name = ((AppAttribute)(type.GetCustomAttributes(typeof(AppAttribute), true).First())).AppName;
-
-                    yield return listApp;
-                }
-            }
-        }
-
+        
         static void ResetScreen()
         {
             Console.BackgroundColor = Color.Black;
