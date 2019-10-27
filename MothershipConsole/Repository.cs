@@ -38,6 +38,34 @@ namespace MothershipConsole
             }
         }
 
+        public static List<Problem> Problems
+        {
+            get
+            {
+                var fromFile = SaveManager.LoadFromJson<List<Problem>>("Problems.json");
+                if (fromFile != null)
+                {
+                    return fromFile;
+                }
+                else
+                {
+                    var created = new List<Problem>();
+                    created.Add(new Problem() { Description = "Analýza problémů narazila na problém. Zkuste přistoupit ke klíči 'ZEVL907a' pomocí jiné aplikace..."
+                                              , Priority = 1000 });
+                    SaveManager.SaveAsJson<List<Problem>>(created, "Problems.json");
+                    return created;
+                }
+            }
+
+            set
+            {
+                if (value != null)
+                {
+                    SaveManager.SaveAsJson<List<Problem>>(value, "Problems.json");
+                }
+            }
+        }
+
         public static List<Experience> Experiences
         {
             get

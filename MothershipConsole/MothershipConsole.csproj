@@ -87,6 +87,7 @@
     <Compile Include="Apps\PigletVRApp.cs" />
     <Compile Include="Apps\CrewManagerApp.cs" />
     <Compile Include="Apps\AppStoreApp.cs" />
+    <Compile Include="Apps\ProblemSolverApp.cs" />
     <Compile Include="Attributes\CommandHelpAttribute.cs" />
     <Compile Include="Attributes\CommandAttribute.cs" />
     <Compile Include="Attributes\AppAttribute.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="ListApp.cs" />
     <Compile Include="Model\CrewMember.cs" />
     <Compile Include="Model\Experience.cs" />
+    <Compile Include="Model\Problem.cs" />
     <Compile Include="MothershipConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
