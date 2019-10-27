@@ -99,7 +99,7 @@ namespace MothershipConsole.Apps
             exp.KeyToUnlock = null; //this makes it activated
             Repository.Experiences = exps;
 
-            Console.WriteLine("Klíč aktivoval novou aplikaci " + exp.Name + "!!!!");
+            Console.WriteLine("Klíč aktivoval novou aplikaci '" + exp.Name + "'");
             
 
             return true;
