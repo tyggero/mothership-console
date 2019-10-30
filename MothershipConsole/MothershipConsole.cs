@@ -33,7 +33,7 @@ namespace MothershipConsole
 #endif
 
             // get apps
-            InstalledApps = Repository.InstalledApps;
+            InstalledApps = Repository.StoreApps;
 
             //get commands
             Parser = new CommandParser(typeof(MothershipConsole));
@@ -41,7 +41,7 @@ namespace MothershipConsole
             //infinite command loop
             while (true) {
                 // get apps
-                InstalledApps = Repository.InstalledApps;
+                //InstalledApps = Repository.InstalledApps;
 
                 Parser.HandleCommand("$-Network/Ship/OS> ");
             }
